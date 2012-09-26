@@ -1,0 +1,10 @@
+* The leafletembed.js file is licensed under CC-by-sa (http://creativecommons.org/licenses/by-sa/2.0/), as it was initially derived from code found in that article : http://switch2osm.org/using-tiles/getting-started-with-leaflet/
+
+* The images *fixed*png and speedCamera.png in the www/images directory are also licensed under that CC-by-sa (http://creativecommons.org/licenses/by-sa/2.0/), as they are derived from the OpenStreetMap wiki (http://wiki.openstreetmap.org/wiki/File:Surveillance.png and http://wiki.openstreetmap.org/wiki/File:Fixed_speed_camera.png).  
+
+* The Mobile-detect.php file is developped by Victor Stanciu and Serban Ghita and is licensed under MIT license (http://opensource.org/licenses/mit-license.php).
+
+* The preset file www/camera_preset_all.xml is derived from the one of JOSM, and is licensed under GPL v3 (http://www.gnu.org/copyleft/gpl.html)
+
+* Everything else is under the WTFPL (http://en.wikipedia.org/wiki/WTFPL). 
+ 
