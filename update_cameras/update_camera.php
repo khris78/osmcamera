@@ -12,7 +12,7 @@ $id = 0;
 $latitude=0;
 $longitude=0;
 
-import "config.php"
+include "config.php";
 
 $mysqli = new mysqli(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWD, MYSQL_DB);
 if($mysqli->connect_errno) {

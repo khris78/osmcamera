@@ -22,8 +22,7 @@ In this paragraph, you are supposed to have yet configured a LAMP server on whic
 `mysql camera -h localhost -u camera --password=[camera user passwd] < rqt.sql`
 * As an alternative, you may download your own planet or an extract, and get the cameras from it : 
   - download the file or an extract and put it in the init_cameras directory. You may download extracts, like Monaco (which is easier to perform tests) at http://www.geofabrik.de/data/download.html. Or you may download a full planet file from the torrent found at ftp://ftp.spline.de/pub/openstreetmap/torrents/.
-  - download the osmconvert.c (from http://wiki.openstreetmap.org/wiki/Osmconvert), and compile it in the init_cameras directory : gcc osmconvert.c -lz -O3 -o osmconvert
-  - execute the extraitVideosurv.sh script (that script requires osmosis : http://wiki.openstreetmap.org/wiki/Osmosis/Installation). It will create a surveillance.osm file and a rqt.sql file. This may be long.
+  - execute the extraitVideosurv.sh script (that script requires osmosis : see http://wiki.openstreetmap.org/wiki/Osmosis/Installation). It will create a surveillance.osm file and a rqt.sql file. This may be long.
   - then execute the following command :  
 `mysql camera -h localhost -u camera --password=[camera user passwd] < rqt.sql`
 
@@ -41,8 +40,8 @@ In this paragraph, you are supposed to have yet configured a LAMP server on whic
 4. Set up the application on the apache server.
 
 * enter the www directory, and copy the config.php.example file to config.php. Edit it to set up the values you wish.
-* get the Jacob Toye's IconLabel plugin for Leaflet. It can be downloaded from https://github.com/jacobtoye. (Note : I don't distribute it, as I didn't find under which licence it is released). 
-* If no other application is installed on your Apache server, you may simply copy the www directory content to your /var/www directory. In any other case you may declare a virtual host. Here is the virtual host definition I use :  
+* get the Jacob Toye's IconLabel plugin for Leaflet. You can download Icon.Label.css and Icon.Label.js from https://github.com/jacobtoye/Leaflet.iconlabel/tree/master/src (Note : I don't distribute it, as I didn't find under which licence it is released). 
+* If no other application is installed on your Apache server, you may simply copy the www directory content to your /var/www directory (and remove the pre-existing index.html from that directory). In any other case you may declare a virtual host. Here is the virtual host definition I use :  
 `<VirtualHost *:80>`
 `	ServerAdmin contact@osmcamera.tk`  
 `        ServerName www.osmcamera.tk`  

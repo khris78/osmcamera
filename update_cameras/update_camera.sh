@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPLICATE_URL="http://download.openstreetmap.fr/replication/planet/minute"
+REPLICATE_URL="http://download.openstreetmap.fr/replication/planet/minute";
 
 if [ -e "/var/lock/update_camera" ]
 then

@@ -104,9 +104,7 @@ function writeToFile($file, $content){
       $isBottom : 1 if bottom point is searched, -1 if top point is searched */
    function quickHullCalc(&$pointList, $count, $minPoint, $maxPoint, $isBottom) {
 
-     writeToFile("logs/quick.log", "=========================\n");
      $msg= "Quick count=".$count.", min=(".$minPoint->id.",".$minPoint->lat.",".$minPoint->lon."), max=(".$minPoint->id.",".$minPoint->lat.",".$minPoint->lon."), isBottom=".$isBottom."\n";
-     writeToFile("logs/quick.log", $msg);
 
      $farthestPoint=null;
      $farthestDist=0;
@@ -169,15 +167,7 @@ function writeToFile($file, $content){
       representing the minimal convex polygon containing the points */
    function quickHull(&$pointList, $count) {
      
-     writeToFile("logs/quick.log", "++++++++++++++++++++++++++++++++++++++++++\n");
-     writeToFile("logs/quick.log", "++++++++++++++++++++++++++++++++++++++++++\n");
      $msg= "Quick count=".$count."\n";
-     writeToFile("logs/quick.log", $msg);
-
-     foreach($pointList as $point) {
-       writeTofile("logs/quick.log", "   ".$point->id.",".$point->lat.",".$point->lon."\n");
-     }
-
 
      if ($count == 0) {
        return array();
