@@ -1,12 +1,12 @@
 <?php
 
-define(DEFAULT_ZOOM, 14);
-define(DEFAULT_LAT, 48.8973114);
-define(DEFAULT_LON, 2.25539446);
+define('DEFAULT_ZOOM', 14);
+define('DEFAULT_LAT', 48.8973114);
+define('DEFAULT_LON', 2.25539446);
 
-define(MYSQL_HOST, 'localhost');
-define(MYSQL_DB, 'camera');
-define(MYSQL_USER, 'camselect');
-define(MYSQL_PASSWD, null);
+define('MYSQL_HOST', 'localhost');
+define('MYSQL_DB', 'camera');
+define('MYSQL_USER', 'camselect');
+define('MYSQL_PASSWD', null);
 
 ?>

@@ -1,8 +1,8 @@
 <?php
 
-define(MYSQL_HOST, 'localhost');
-define(MYSQL_DB, 'camera');
-define(MYSQL_USER, 'camera');
-define(MYSQL_PASSWD, 'xxxxxxxx');
+define('MYSQL_HOST', 'localhost');
+define('MYSQL_DB', 'camera');
+define('MYSQL_USER', 'camera');
+define('MYSQL_PASSWD', 'xxxxxxxx');
 
 ?>
