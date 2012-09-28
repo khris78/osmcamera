@@ -37,6 +37,13 @@ var domeIcon = L.icon({
   popupAnchor : [0, -10]
 });
 
+var guardIcon = L.icon({
+  iconUrl: 'images/guard.png',
+  iconSize: [20, 20],
+  iconAnchor: [10, 10],
+  popupAnchor : [0, -10]
+});
+
 var fixedBlueIcon = L.icon({
   iconUrl: 'images/fixedBlue.png',
   iconSize: [20, 20],
@@ -46,6 +53,13 @@ var fixedBlueIcon = L.icon({
 
 var domeBlueIcon = L.icon({
   iconUrl: 'images/domeBlue.png',
+  iconSize: [20, 20],
+  iconAnchor: [10, 10],
+  popupAnchor : [0, -10]
+});
+
+var guardBlueIcon = L.icon({
+  iconUrl: 'images/guardBlue.png',
   iconSize: [20, 20],
   iconAnchor: [10, 10],
   popupAnchor : [0, -10]
@@ -65,6 +79,13 @@ var domeGreenIcon = L.icon({
   popupAnchor : [0, -10]
 });
 
+var guardGreenIcon = L.icon({
+  iconUrl: 'images/guardGreen.png',
+  iconSize: [20, 20],
+  iconAnchor: [10, 10],
+  popupAnchor : [0, -10]
+});
+
 var fixedRedIcon = L.icon({
   iconUrl: 'images/fixedRed.png',
   iconSize: [20, 20],
@@ -74,6 +95,13 @@ var fixedRedIcon = L.icon({
 
 var domeRedIcon = L.icon({
   iconUrl: 'images/domeRed.png',
+  iconSize: [20, 20],
+  iconAnchor: [10, 10],
+  popupAnchor : [0, -10]
+});
+
+var guardRedIcon = L.icon({
+  iconUrl: 'images/guardRed.png',
   iconSize: [20, 20],
   iconAnchor: [10, 10],
   popupAnchor : [0, -10]
@@ -273,7 +301,12 @@ function stateChanged() {
         } else {
           try {
           plotll = new L.LatLng(plotlist[i].lat,plotlist[i].lon, true);
-          var iconName = (plotlist[i]['camera:type'] == 'dome' ? 'dome' : 'fixed');
+          var iconName = 'fixed';
+          if (plotlist[i]['camera:type'] == 'dome') {
+            iconName = 'dome';
+          } else if (plotlist[i]['surveillance:type'] == 'guard') {
+            iconName = 'guard';
+          }
           if (plotlist[i]['fixme'] != null) {
             iconName = 'todo_' + iconName;
           }
