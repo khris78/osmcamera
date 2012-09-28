@@ -1,6 +1,8 @@
 #!/bin/bash
 
-REPLICATE_URL="http://download.openstreetmap.fr/replication/planet/minute";
+exedir=$(cd `dirname "$0"`; pwd)
+
+REPLICATE_URL=`grep "REPLICATE_URL" "$exedir/config.php"  | sed -e 's/.*http/http/' -e 's#...$##' `
 
 if [ -e "/var/lock/update_camera" ]
 then

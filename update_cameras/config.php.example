@@ -1,5 +1,7 @@
 <?php
 
+define('REPLICATE_URL', 'http://download.openstreetmap.fr/replication/planet/minute');
+
 define('MYSQL_HOST', 'localhost');
 define('MYSQL_DB', 'camera');
 define('MYSQL_USER', 'camera');
