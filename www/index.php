@@ -4,6 +4,16 @@
   require_once 'Mobile_Detect.php';
   $detect = new Mobile_Detect();
   $isMobile = $detect->isMobile(); 
+  $showMap=true;
+  $showText=true;
+
+  if ($isMobile) {
+    if (array_key_exists('infos', $_GET)) {
+      $showMap=false;
+    } else {
+      $showText=false;
+    }
+  }
 
   if (array_key_exists('zoom', $_GET)) {
     $initialZoom = $_GET['zoom'];
@@ -30,7 +40,7 @@
   <meta charset="UTF-8"/>
   <?php
     /* Disable unwanted scaling */
-    if ($isMobile) {
+    if ($isMobile && $showMap) {
   ?>
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <?php
@@ -38,6 +48,9 @@
   ?>
 </head>
 <body>
+<?php
+  if ($showMap) {
+?>
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
 <!--[if lte IE 8]>
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.ie.css" />
@@ -94,7 +107,42 @@ html, body, #map {
 
 <div id="map" style="height:500px"></div>
 
+<?php
+if ($isMobile) {
+?>
+<div id="moreInfo" style="position:fixed;top:5px;right:5px">
+<a href="index.php?infos=yes"/><img src="images/infos.png" width="35"/></a>
+</div>
+<?php
+}
+?>
+
 <script src="leafletembed.js"></script>
+
+<?php
+}  /* if ($showMap) */
+
+if ($showText) {
+  if ($isMobile) {
+?>
+<div style="width:100%;text-align:center;background:SeaGreen"/>
+<a href="index.php" style="color:white;font-size:200%">Retour à la carte / <i>Back to the map</i></a>
+</div>
+<?php    
+} 
+?>
+
+<div style="width:100%;overflow:auto">
+<h3>Nouvelles / News</h3>
+<h4>2012-09-30</h4>
+Le code de ce site est maintenant disponible sur <a href="https://github.com/khris78/osmcamera">GitHub</a>.<br/>
+<i>The source code for this site is now available at <a href="https://github.com/khris78/osmcamera">GitHub</a>.</i>
+</div>
+
+<?php
+} /* if ($showText */
+?>
+
 </body>
 </html>
 <?php

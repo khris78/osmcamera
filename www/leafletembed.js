@@ -176,7 +176,6 @@ function onLocationFound(e) {
 
 function onLocationError(e) {
   map.stopLocate();
-  map.setView(new L.LatLng(48.85,2.34),12);
 }
 
 function permalink() {

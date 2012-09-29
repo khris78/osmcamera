@@ -1,2 +1,7 @@
 config.php
 *~
+*.svg
+Icon.Label*
+state.txt
+lastState.txt
+change_file.osc*
