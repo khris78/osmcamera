@@ -335,6 +335,31 @@ function stateChanged() {
           var cameraType = plotlist[i]['camera:type'];
           if (cameraType == 'fixed' || cameraType == 'static') {
             direction = plotlist[i]['camera:direction'];
+            if (direction == null) {
+              direction = plotlist[i]['direction'];
+              if (direction == null) {
+                direction = plotlist[i]['surveillance:direction'];
+              }
+            }
+    
+            if (direction == 'N') {
+              direction = 0;
+            } else if (direction == 'NE') {
+              direction = 45;
+            } else if (direction == 'E') {
+              direction = 90;
+            } else if (direction == 'SE') {
+              direction = 135;
+            } else if (direction == 'S') {
+              direction = 180;
+            } else if (direction == 'SW') {
+              direction = 225;
+            } else if (direction == 'W') {
+              direction = 270;
+            } else if (direction == 'NW') {
+              direction = 315;
+            }
+
             if (direction !='' && isNumeric(direction)) {
               direction = 90 - direction;
               if (direction > 180) {
@@ -343,10 +368,26 @@ function stateChanged() {
                 direction += 360;
               }
               direction=(direction*207986.0)/11916720;
+
+              var angle = plotlist[i]['camera:angle'];
+              if (angle != null && isNumeric(angle)) {
+                if (angle < 0) {
+                  angle = -angle;
+                }
+                if (angle <= 15) {
+                  angle = 1;
+                } else {
+                  angle=Math.cos(((angle - 15)*207986.0)/11916720);
+                }
+              } else {
+                angle=1;
+              }
+
               var line= [plotll];
+              var coefLat = (1.0/Math.cos(plotlist[i].lat * 3.14159 / 180));
               for (a=-5 ; a <= 5 ; a+=2) {
-                var plotll = new L.LatLng(parseFloat(plotlist[i].lat) + 0.0001 * Math.sin(direction + a / 10) * cameraHeight, 
-                                          parseFloat(plotlist[i].lon) + 0.0001 * Math.cos(direction + a / 10) * (1.0/Math.cos(plotlist[i].lat * 3.14159 / 180)) * cameraHeight, 
+                var plotll = new L.LatLng(parseFloat(plotlist[i].lat) + 0.000063 * Math.sin(direction + a / 10) * cameraHeight * angle, 
+                                          parseFloat(plotlist[i].lon) + 0.000063 * Math.cos(direction + a / 10) * coefLat * cameraHeight * angle, 
                                           true) ;
                 line.push(plotll);
               }
@@ -354,6 +395,7 @@ function stateChanged() {
               map.addLayer(plotAngle);
               plotlayers.push(plotAngle);
             }
+
           } else if (cameraType == 'dome' ) {
               var plotAngle = new L.Circle(plotll, 7 * cameraHeight, { color:'red', weight : 1, fillOpacity:0.1 });
               map.addLayer(plotAngle);
