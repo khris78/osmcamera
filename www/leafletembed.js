@@ -206,7 +206,7 @@ function initmap() {
 
   // start the map in Paris
   map.setView(new L.LatLng(initialLat,initialLon),initialZoom);
-  if (isMobile) {
+  if (isMobile && initialIsDefault) {
     map.on('locationfound', onLocationFound);
     map.on('locationerror', onLocationError);
     map.locate( { setView:true });
@@ -404,7 +404,8 @@ function stateChanged() {
              
 
           plotmark.data='<table class="popup-content">'
-                       +'<tr><td>id</td><td>'+(plotlist[i].id)+'</td></tr>'
+                       +'<tr><td>id</td><td><a target="_blank" href="http://osm.org/browse/node/'
+                         +(plotlist[i].id)+'">' + (plotlist[i].id) + '</td></tr>'
                        +'<tr><td>user osm</td><td>'+(plotlist[i].userid)+'</td></tr>'
                        +'<tr><td>latitude</td><td>'+(plotlist[i].lat)+'</td></tr>'
                        +'<tr><td>longitude</td><td>'+(plotlist[i].lon)+'</td></tr>';

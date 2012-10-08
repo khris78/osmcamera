@@ -15,8 +15,25 @@
     }
   }
 
+  $language='en';
+  $locale = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+  $lstLng = explode(',', $locale);
+  foreach($lstLng as $lng) {
+    $lng = substr(trim($lng), 0, 2);
+    if ($lng == 'fr') {
+      $language = 'fr';
+      break;
+    } else if ($lng == 'en') {
+      $language = 'en';
+      break;
+    }
+  }
+
+  $initialIsDefault='true';
+
   if (array_key_exists('zoom', $_GET)) {
     $initialZoom = $_GET['zoom'];
+    $initialIsDefault='false';
   } else {
     $initialZoom = DEFAULT_ZOOM;
   }
@@ -24,6 +41,7 @@
   if (array_key_exists('lat', $_GET) && array_key_exists('lon', $_GET)) {
     $initialLat = $_GET['lat'];
     $initialLon = $_GET['lon'];
+    $initialIsDefault='false';
   } else {
     $initialLat = DEFAULT_LAT;
     $initialLon = DEFAULT_LON;
@@ -58,16 +76,28 @@
 <link rel="stylesheet" href="Icon.Label.css" />
 
 <style>
-<?php
-  /* Set the map in fullscreen mode on mobile devices */
-  if ($isMobile) {
-?>
 body {
     padding: 0;
     margin: 0;
 }
+<?php
+  if ($isMobile) {
+    /* Set the map in fullscreen mode on mobile devices */
+?>
 html, body, #map {
     height: 100%;
+}
+<?php
+  } else {
+    /* Keep some space for the caption on other devices */
+?>
+html, body {
+    height: 100%;
+    width: 100%;
+}
+#map {
+    height: 75%;
+    width: 100%;
 }
 <?php
   }
@@ -94,6 +124,7 @@ html, body, #map {
   echo "var initialLat=$initialLat\n";
   echo "var initialLon=$initialLon\n";
   echo "var initialZoom=$initialZoom\n";
+  echo "var initialIsDefault=$initialIsDefault\n";
   echo "var debug='$debug'\n";
   if ($isMobile) {
     echo "var isMobile=true;\n";
@@ -105,7 +136,7 @@ html, body, #map {
 <script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
 <script src="Icon.Label.js"></script>
 
-<div id="map" style="height:500px"></div>
+<div id="map"></div>
 
 <?php
 if ($isMobile) {
@@ -133,12 +164,14 @@ if ($showText) {
 ?>
 
 <div style="width:100%;overflow:auto">
-<h3>Nouvelles / News</h3>
-<h4>2012-09-30</h4>
-Le code de ce site est maintenant disponible sur <a href="https://github.com/khris78/osmcamera">GitHub</a>.<br/>
-<i>The source code for this site is now available at <a href="https://github.com/khris78/osmcamera">GitHub</a>.</i>
+<?php
+if ($language == "fr") { 
+  include "text_fr.php";
+} else {
+  include "text_en.php";
+}
+?>
 </div>
-
 <?php
 } /* if ($showText */
 ?>

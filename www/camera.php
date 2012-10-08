@@ -476,7 +476,7 @@ function writeToFile($file, $content){
 
          while($stmt->fetch()) {
            $resultat=$resultat
-                    .',"'.htmlentities($k).'":"'.htmlentities($v).'"';
+                    .',"'.htmlentities($k).'":"'.htmlentities($v, ENT_COMPAT, 'UTF-8').'"';
          }
 
        } else {
@@ -509,6 +509,6 @@ function writeToFile($file, $content){
 
    $mysqli->close();
 
-   header('Content-type: application/json');
+   header('Content-type: application/json; Charset : utf-8');
    echo $resultat;
 ?>
