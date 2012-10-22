@@ -33,7 +33,12 @@
 
   if (array_key_exists('zoom', $_GET)) {
     $initialZoom = $_GET['zoom'];
-    $initialIsDefault='false';
+    if (is_numeric($initialZoom) 
+        && intval($initialZoom) >= 1 && intval($initialZoom) <= 18) {
+      $initialIsDefault='false';
+    } else {
+      $initialZoom = DEFAULT_ZOOM;
+    }
   } else {
     $initialZoom = DEFAULT_ZOOM;
   }
@@ -41,7 +46,12 @@
   if (array_key_exists('lat', $_GET) && array_key_exists('lon', $_GET)) {
     $initialLat = $_GET['lat'];
     $initialLon = $_GET['lon'];
-    $initialIsDefault='false';
+    if ( is_numeric($initialLat) && is_numeric($initialLon)) { 
+      $initialIsDefault='false';
+    } else {
+      $initialLat = DEFAULT_LAT;
+      $initialLon = DEFAULT_LON;
+    }
   } else {
     $initialLat = DEFAULT_LAT;
     $initialLon = DEFAULT_LON;
@@ -56,6 +66,17 @@
 <html>
 <head>
   <meta charset="UTF-8"/>
+  <?php
+    if ($language == "fr") { 
+  ?>
+    <title>La carte de la vidéosurveillance (extraite d'OpenStreetMap)</title>
+  <?php
+    } else {
+  ?>
+    <title>The CCTV map (extracted from OpenStreetMap)</title>
+  <?php
+    }
+  ?>
   <?php
     /* Disable unwanted scaling */
     if ($isMobile && $showMap) {
