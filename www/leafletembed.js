@@ -183,9 +183,15 @@ function permalink() {
   var lat = Math.round(center.lat * 100000000) / 100000000;
   var lon = Math.round(center.lng * 100000000) / 100000000;
   var serverUrl='http://' + window.location.hostname + '/index.php';
-  var newLoc=serverUrl + "?lat=" + lat + "&lon=" + lon + "&zoom=" + map.getZoom();
+  var layer = map.hasLayer(osmTiles) ? "&layer=osm" : "";
+  var newLoc=serverUrl + "?lat=" + lat + "&lon=" + lon + "&zoom=" + map.getZoom() + layer;
   window.location=newLoc;
 }
+
+// Layers
+var osmTiles;
+var mapQuestTiles;
+
 
 function initmap() {
 
@@ -199,10 +205,21 @@ function initmap() {
   // set up the map
   map = new L.Map('map');
 
-  // create the tile layer with correct attribution
+  // create the tile layers with correct attribution
+  var permalink=' — <a href=#" onClick="permalink();return false;">Permalink</a>';
+  var dataAttrib='Map data from <a href="http://www.osm.org" target="_blank">OpenStreetMap</a> contributors';
+
   var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-  var osmAttrib='Map data from OpenStreetMap contributors -- <a href=#" onClick="permalink();return false;">Permalink</a>';
-  var osm = new L.TileLayer(osmUrl, {minZoom: 4, maxZoom: 18, attribution: osmAttrib});		
+  var osmAttrib=dataAttrib + permalink;
+  osmTiles = new L.TileLayer(osmUrl, {minZoom: 4, maxZoom: 18, attribution: osmAttrib});		
+  var mapQuestUrl='http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png'; 
+  var mapQuestAttrib='Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png"> — ' + dataAttrib + permalink;
+  mapQuestTiles = new L.TileLayer(mapQuestUrl, {minZoom: 4, maxZoom: 18, attribution: mapQuestAttrib, subdomains: '1234'});		
+
+  var baseLayers = {
+    "MapQuest": mapQuestTiles,
+    "OpenStreetMap": osmTiles
+  };
 
   // start the map in Paris
   map.setView(new L.LatLng(initialLat,initialLon),initialZoom);
@@ -211,7 +228,12 @@ function initmap() {
     map.on('locationerror', onLocationError);
     map.locate( { setView:true });
   }
-  map.addLayer(osm);
+  if (initialLayer == 'osm') {
+    map.addLayer(osmTiles);
+  } else {
+    map.addLayer(mapQuestTiles);
+  }
+  L.control.layers(baseLayers, null, {position: 'topleft'}).addTo(map);
 
   askForPlots();
   map.on('moveend', onMapMove);

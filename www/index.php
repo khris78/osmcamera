@@ -57,6 +57,15 @@
     $initialLon = DEFAULT_LON;
   }
 
+  $initialLayer='';
+  if (array_key_exists('layer', $_GET)) {
+    $initialLayer = $_GET['layer'];
+    if ($initialLayer != 'osm') {
+      $initialLayer='';
+    }
+  }
+
+
   $debug = (array_key_exists('debug', $_GET) 
             && ($_GET['debug'] == 'yes' 
                 || $_GET['debug'] == 'true')) ? 'yes' : 'no';
@@ -142,15 +151,20 @@ html, body {
 
 <script language="javascript">
 <?php
-  echo "var initialLat=$initialLat\n";
-  echo "var initialLon=$initialLon\n";
-  echo "var initialZoom=$initialZoom\n";
-  echo "var initialIsDefault=$initialIsDefault\n";
+  echo "var initialLat=$initialLat;\n";
+  echo "var initialLon=$initialLon;\n";
+  echo "var initialZoom=$initialZoom;\n";
+  echo "var initialIsDefault=$initialIsDefault;\n";
   echo "var debug='$debug'\n";
   if ($isMobile) {
     echo "var isMobile=true;\n";
   } else {
     echo "var isMobile=false;\n";
+  }
+  if ($initialLayer != '') {
+    echo "var initialLayer='$initialLayer';\n";
+  } else {
+    echo "var initialLayer='mapquest';\n";
   }
 ?>
 </script>
