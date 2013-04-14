@@ -27,28 +27,28 @@ if (! ($deleteStmt = $mysqli->prepare("DELETE FROM position WHERE id=?"))) {
   exit(1);
 }
 
-$deleteStmt->bind_param('i', $id);
+$deleteStmt->bind_param('d', $id);
 
 if (! ($deleteTagStmt = $mysqli->prepare("DELETE FROM tag WHERE id=?"))) {
   echo 'Error while preparing delete tag statement : ' . $mysqli->error ;
   exit(1);
 }
 
-$deleteTagStmt->bind_param('i', $id);
+$deleteTagStmt->bind_param('d', $id);
 
 if (! ($insertStmt = $mysqli->prepare("INSERT INTO position (id, latitude, longitude) VALUES (?, ?, ?)"))) {
   echo 'Error while preparing insert position statement : ' . $mysqli->error ;
   exit(1);
 }
 
-$insertStmt->bind_param('iii', $id, $latitude, $longitude);
+$insertStmt->bind_param('dii', $id, $latitude, $longitude);
 
 if (! ($insertTagStmt = $mysqli->prepare("INSERT INTO tag (id, k, v) VALUES (?, ?, ?)"))) {
   echo 'Error while preparing insert tag statement : ' . $mysqli->error ;
   exit(1);
 }
 
-$insertTagStmt->bind_param('iss', $id, $k, $v);
+$insertTagStmt->bind_param('dss', $id, $k, $v);
 
 function printDebug() {
   global $elementTypes, $count, $countDelete, $countModify, $countCreate;
@@ -69,12 +69,12 @@ function printDebugCurNode() {
   echo "=============\n";
   echo "$mode : " . $curNodeAttrs['id'] ." (". $curNodeAttrs['lat'] . " x " . $curNodeAttrs['lon'] . ") :  " . $curNodeAttrs['user'] . "\n";
   if (! empty($curNodeAttrs)) {
-    echo "  => Attributs :\n";
+    echo "  => Attributes :\n";
     foreach($curNodeAttrs as $k => $v) {
       echo "   $k : $v\n";
     }
   } else {
-     echo "  => Pas d'attributs\n";
+     echo "  => No attributes\n";
   }
   if (! empty($curNodeTags)) {
     echo "  => Tags :\n";
@@ -82,7 +82,7 @@ function printDebugCurNode() {
       echo "   $k : $v\n";
     }
   } else {
-     echo "  => Pas de tags\n";
+     echo "  => No tags\n";
   }
 }
 
@@ -132,10 +132,10 @@ function endElement ($parser, $name) {
     if ($mode == 'delete') {
       $id = $curNodeAttrs['id'];
       if (! $deleteTagStmt->execute()) {
-        echo "***** Erreur : Supression tags $id : ". $deleteStmt->error . "\n";
+        echo "***** Error : Deleting tags $id : ". $deleteStmt->error . "\n";
       }
       if (! $deleteStmt->execute()) {
-        echo "***** Erreur : Supression $id : ". $deleteStmt->error . "\n";
+        echo "***** Erreur : Deleting $id : ". $deleteStmt->error . "\n";
       }
       if ($deleteStmt->affected_rows > 0) {
         $countDelete++;
@@ -155,10 +155,10 @@ function endElement ($parser, $name) {
         if ($mode == 'modify') {
           $countModify++;
           if (! $deleteTagStmt->execute()) {
-            echo "***** Erreur : Suppression tags $id pour modification : ". $deleteStmt->error . "\n";
+            echo "***** Error : Deleting tags $id for modification : ". $deleteStmt->error . "\n";
           }      
           if (! $deleteStmt->execute()) {
-            echo "***** Erreur : Suppression $id pour modification : ". $deleteStmt->error . "\n";
+            echo "***** Error : Deleting $id for modification : ". $deleteStmt->error . "\n";
           }      
         } else {
           $countCreate++;
@@ -168,42 +168,42 @@ function endElement ($parser, $name) {
         $longitude = (int) ($curNodeAttrs['lon'] * 10000000);
 
         if (! $insertStmt->execute()) {
-          echo "***** Erreur : insertion $id ($latitude x $longitude) : ". $insertStmt->error . "\n";
+          echo "***** Error : inserting $id ($latitude x $longitude) : ". $insertStmt->error . "\n";
         }
 
         $k='lat';
         $v=$curNodeAttrs['lat'];
         if (! $insertTagStmt->execute()) {
-          echo "***** Erreur : insertion latitude $v pour $id : ". $insertTagStmt->error . "\n";
+          echo "***** Error : inserting latitude $v for $id : ". $insertTagStmt->error . "\n";
         }
 
         $k='lon';
         $v=$curNodeAttrs['lon'];
         if (! $insertTagStmt->execute()) {
-          echo "***** Erreur : insertion longitude $v pour $id : ". $insertTagStmt->error . "\n";
+          echo "***** Error : inserting longitude $v for $id : ". $insertTagStmt->error . "\n";
         }
 
         $k='userid';
         $v=$curNodeAttrs['user'];
         if (! $insertTagStmt->execute()) {
-          echo "***** Erreur : insertion user $v pour $id : ". $insertTagStmt->error . "\n";
+          echo "***** Error : inserting user $v for $id : ". $insertTagStmt->error . "\n";
         }
 
         $k='version';
         $v=$curNodeAttrs['version'];
         if (! $insertTagStmt->execute()) {
-          echo "***** Erreur : insertion user $v pour $id : ". $insertTagStmt->error . "\n";
+          echo "***** Error : inserting version $v for $id : ". $insertTagStmt->error . "\n";
         }
 
         $k='timestamp';
         $v=$curNodeAttrs['timestamp'];
         if (! $insertTagStmt->execute()) {
-          echo "***** Erreur : insertion user $v pour $id : ". $insertTagStmt->error . "\n";
+          echo "***** Error : inserting timestamp $v for $id : ". $insertTagStmt->error . "\n";
         }
 
         foreach($curNodeTags as $k => $v) {
           if (! $insertTagStmt->execute()) {
-            echo "***** Erreur : insertion tag $k => $v pour $id : ". $insertTagStmt->error . "\n";
+            echo "***** Error : inserting tag $k => $v for $id : ". $insertTagStmt->error . "\n";
           }
         }
        
