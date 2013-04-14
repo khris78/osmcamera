@@ -456,7 +456,7 @@ function writeToFile($file, $content){
             AND  k NOT IN ('lat', 'lon')";
 
    $stmt = $mysqli->prepare($sql);
-   $stmt->bind_param("i", $id);
+   $stmt->bind_param("d", $id);
    $stmt->bind_result($k, $v);
  
    /* Ecriture des points regroupés ou non */
