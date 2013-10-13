@@ -82,21 +82,21 @@ function writeToFile($file, $content){
      if ($latLon[0] > 0 && $latLon[1] < $divHCount - 1) {
        if ($latLon[0] > 0) {
          $posNeigh = ($latLon[0] - 1) . ',' . ($latLon[1] + 1);
-         mergeNeighbor(&$clusterGrid, $pos, $posNeigh);
+         mergeNeighbor($clusterGrid, $pos, $posNeigh);
        }
 
        $posNeigh = $latLon[0] . ',' . ($latLon[1] + 1);
-       mergeNeighbor(&$clusterGrid, $pos, $posNeigh);
+       mergeNeighbor($clusterGrid, $pos, $posNeigh);
 
        if ($latLon[0] < $divWCount - 1) {
          $posNeigh = ($latLon[0] + 1) . ',' . ($latLon[1] + 1);
-         mergeNeighbor(&$clusterGrid, $pos, $posNeigh);
+         mergeNeighbor($clusterGrid, $pos, $posNeigh);
        }
      } 
 
      if ($latLon[0] < $divWCount - 1) {
        $posNeigh = ($latLon[0] + 1) . ',' . $latLon[1];
-       mergeNeighbor(&$clusterGrid, $pos, $posNeigh);
+       mergeNeighbor($clusterGrid, $pos, $posNeigh);
      } 
    }
 
