@@ -43,9 +43,9 @@ In this paragraph, you are supposed to have yet configured a LAMP server on whic
 * get the Jacob Toye's IconLabel plugin for Leaflet. You can download Icon.Label.css and Icon.Label.js from https://github.com/jacobtoye/Leaflet.iconlabel/tree/master/src (Note : I don't distribute it, as I didn't find under which licence it is released). 
 * If no other application is installed on your Apache server, you may simply copy the www directory content to your /var/www directory (and remove the pre-existing index.html from that directory). In any other case you may declare a virtual host. Here is the virtual host definition I use :  
 `<VirtualHost *:80>`
-`	ServerAdmin contact@osmcamera.tk`  
-`        ServerName www.osmcamera.tk`  
-`        ServerAlias osmcamera.tk *.osmcamera.tk`  
+`	ServerAdmin contact@osm-camera.tk`  
+`        ServerName www.osm-camera.tk`  
+`        ServerAlias osm-camera.tk *.osm-camera.tk`  
 ` `  
 `	DocumentRoot /var/www/camera`  
 `	<Directory />`  
@@ -72,7 +72,7 @@ In this paragraph, you are supposed to have yet configured a LAMP server on whic
 Credits
 =======
 
-* OpenStreetMap and contributors : all data displayed by osmcamera.tk are from OSM : the tiles are from Mapnik (license CC-by-sa), and the camera info is extracted directly from OSM (license Odbl). 
+* OpenStreetMap and contributors : all data displayed by osm-camera.tk are from OSM : the tiles are from Mapnik (license CC-by-sa), and the camera info is extracted directly from OSM (license Odbl). 
 * Switch2osm : you may recognize some little parts of their code, as I initialised the leaflet stuff from this page : http://switch2osm.org/using-tiles/getting-started-with-leaflet/  
   License : CC-by-sa (so I'm bound to license the leafletembed.js file under that licence)
 * Leaflet, by cloudmade : the map is based on the leaflet API (linked from the index.php. I don't care the licence as I don't redistribute it...)
