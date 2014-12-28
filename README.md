@@ -31,6 +31,7 @@ In this paragraph, you are supposed to have yet configured a LAMP server on whic
 * Enter the update_cameras repository.
 * The automatic update is based on the sequenceNumber comparison between the current state.txt from the replicate server, and the locally stored lastState.txt. So if you downloaded a planet file, you should modify the sequenceNumber in the lastState.txt file accordingly.
 * Rename config.php.example file, and edit it to enter the database password you configured for the database user "camera".  
+* Create directory update_cameras/logs
 * Add the update script to your crontab. Execute :  
   `crontab -e`  
   and enter the following line :  
