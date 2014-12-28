@@ -1,7 +1,7 @@
 osmcamera
 =========
 
-This project contains the sources for the map at http://osmcamera.tk
+This project contains the sources for the map at http://osm-camera.tk
 
 
 Installation
