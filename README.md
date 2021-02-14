@@ -4,6 +4,7 @@ osmcamera
 This project contains the source code for the map initially displayed at http://osm-camera.tk. This site is now closed.
 
 This code has been reused and improved by at least 2 people who operate the following sites:
+* https://cctv.masspirates.org/
 * http://osmcamera.dihe.de/
 * https://kamba4.crux.uberspace.de/
 
