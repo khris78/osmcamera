@@ -182,7 +182,7 @@ function permalink() {
   var center = map.getCenter();
   var lat = Math.round(center.lat * 100000000) / 100000000;
   var lon = Math.round(center.lng * 100000000) / 100000000;
-  var serverUrl='http://' + window.location.hostname + '/index.php';
+  var serverUrl='https://' + window.location.hostname + '/index.php';
   var layer = map.hasLayer(osmTiles) ? "&layer=osm" : "";
   var newLoc=serverUrl + "?lat=" + lat + "&lon=" + lon + "&zoom=" + map.getZoom() + layer;
   window.location=newLoc;
@@ -207,13 +207,14 @@ function initmap() {
 
   // create the tile layers with correct attribution
   var permalink=' — <a href=#" onClick="permalink();return false;">Permalink</a>';
-  var dataAttrib='Map data from <a href="http://www.osm.org" target="_blank">OpenStreetMap</a> contributors';
+  var dataAttrib='Map data from <a href="https://www.openstreetmap.org" target="_blank">OpenStreetMap</a> contributors';
 
-  var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  var osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
   var osmAttrib=dataAttrib + permalink;
   osmTiles = new L.TileLayer(osmUrl, {minZoom: 4, maxZoom: 18, attribution: osmAttrib});		
-  var mapQuestUrl='http://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png'; 
-  var mapQuestAttrib='Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png"> — ' + dataAttrib + permalink;
+  // Need to find an https equivalent for this or else the map tiles do not show up
+  var mapQuestUrl='https://otile{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png'; 
+  var mapQuestAttrib='Tiles Courtesy of <a href="https://www.mapquest.com/" target="_blank">MapQuest</a> <img src="https://developer.mapquest.com/content/osm/mq_logo.png"> — ' + dataAttrib + permalink;
   mapQuestTiles = new L.TileLayer(mapQuestUrl, {minZoom: 4, maxZoom: 18, attribution: mapQuestAttrib, subdomains: '1234'});		
 
   var baseLayers = {
@@ -426,7 +427,7 @@ function stateChanged() {
              
 
           plotmark.data='<table class="popup-content">'
-                       +'<tr><td>id</td><td><a target="_blank" href="http://osm.org/browse/node/'
+                       +'<tr><td>id</td><td><a target="_blank" href="https://openstreetmap.org/browse/node/'
                          +(plotlist[i].id)+'">' + (plotlist[i].id) + '</td></tr>'
                        +'<tr><td>user osm</td><td>'+(plotlist[i].userid)+'</td></tr>'
                        +'<tr><td>latitude</td><td>'+(plotlist[i].lat)+'</td></tr>'

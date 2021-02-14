@@ -2,7 +2,7 @@
 
    include 'config.php';
 
-   define(MAX_POINTS_FOR_QUICKHULL, 3000);
+   define('MAX_POINTS_FOR_QUICKHULL', 3000);
 
    class OsmPoint {
      var $id;

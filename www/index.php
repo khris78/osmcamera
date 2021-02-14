@@ -57,7 +57,7 @@
     $initialLon = DEFAULT_LON;
   }
 
-  $initialLayer='';
+  $initialLayer='osm';
   if (array_key_exists('layer', $_GET)) {
     $initialLayer = $_GET['layer'];
     if ($initialLayer != 'osm') {
@@ -99,11 +99,14 @@
 <?php
   if ($showMap) {
 ?>
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
+<!--
+<link rel="stylesheet" href="https://cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
+-->
+<link rel="stylesheet" href="https://cctv.masspirates.org/leaflet-0.4/leaflet.css" />
 <!--[if lte IE 8]>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.ie.css" />
+    <link rel="stylesheet" href="https://cdn.leafletjs.com/leaflet-0.4/leaflet.ie.css" />
 <![endif]-->
-<link rel="stylesheet" href="Icon.Label.css" />
+<link rel="stylesheet" href="https://cctv.masspirates.org/Icon.Label.css" />
 
 <style>
 body {
@@ -168,8 +171,11 @@ html, body {
   }
 ?>
 </script>
-<script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
-<script src="Icon.Label.js"></script>
+<!--
+<script src="https://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
+-->
+<script src="https://cctv.masspirates.org/leaflet-0.4/leaflet.js"></script>
+<script src="https://cctv.masspirates.org/Icon.Label.js"></script>
 
 <div id="map"></div>
 
@@ -177,13 +183,13 @@ html, body {
 if ($isMobile) {
 ?>
 <div id="moreInfo" style="position:fixed;top:5px;right:5px">
-<a href="index.php?infos=yes"/><img src="images/infos.png" width="35"/></a>
+<a href="index.php?infos=yes"/><img src="https://cctv.masspirates.org/images/infos.png" width="35"/></a>
 </div>
 <?php
 }
 ?>
 
-<script src="leafletembed.js"></script>
+<script src="https://cctv.masspirates.org/leafletembed.js"></script>
 
 <?php
 }  /* if ($showMap) */
