@@ -5,7 +5,7 @@ This project contains the source code for the map initially displayed at http://
 
 This code has been reused and improved by at least 2 people who operate the following sites:
 * http://osmcamera.dihe.de/
-* https://kamba4.crux.uberspace.de/
+* https://sunders.uber.space (code: https://github.com/rauhkrusche/sunders)
 
 
 Installation
