@@ -206,7 +206,7 @@ function initmap() {
   map = new L.Map('map');
 
   // create the tile layers with correct attribution
-  var permalink=' — <a href=#" onClick="permalink();return false;">Permalink</a>';
+  var permalink=' - <a href="#" onClick="permalink();return false;">Permalink</a>';
   var dataAttrib='Map data from <a href="http://www.osm.org" target="_blank">OpenStreetMap</a> contributors';
 
   var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
